@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Zen Phone Lock — Privacy Policy</title>
+<style>
+  :root {
+    --bg: #f6f1e8;
+    --text: #22252a;
+    --muted: #5d6263;
+    --accent: #4f8f87;
+    --card: #ffffff;
+    --border: #d8d0c2;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+  }
+  header {
+    background: var(--accent);
+    color: #fffdf8;
+    padding: 32px 20px;
+  }
+  header h1 { margin: 0 0 6px; font-size: 1.6rem; }
+  header p { margin: 0; opacity: 0.9; font-size: 0.95rem; }
+  main {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 24px 20px 60px;
+  }
+  section {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 22px;
+    margin-bottom: 16px;
+  }
+  section h2 {
+    font-size: 1.05rem;
+    margin: 0 0 10px;
+  }
+  section p {
+    margin: 0;
+    color: var(--text);
+  }
+  .updated {
+    color: var(--muted);
+    font-size: 0.85rem;
+    margin-bottom: 24px;
+  }
+  footer {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 20px 40px;
+    color: var(--muted);
+    font-size: 0.85rem;
+  }
+  a { color: var(--accent); }
+</style>
+</head>
+<body>
+<header>
+  <h1>Zen Phone Lock — Privacy Policy</h1>
+  <p>Package: com.focuslock.app</p>
+</header>
+<main>
+  <p class="updated">Last updated: <!-- UPDATE THIS DATE when you publish --> 26 August 2026</p>
+
+  <section>
+    <h2>No data collection</h2>
+    <p>Zen Focus Lock has no account, no analytics, no ad network, and makes no network requests
+      of any kind. Every setting and session record it keeps — your duration, allowed apps, and
+      session history — is stored only in this app's private local storage on your device.
+      Nothing is ever sent anywhere, and nothing is shared with any third party.</p>
+  </section>
+
+  <section>
+    <h2>What the Accessibility permission is used for</h2>
+    <p>Zen Focus Lock uses Android's Accessibility service for one purpose only: detecting which
+      app is in the foreground, so it can show a restriction screen in place of apps you didn't
+      allow during an active session. It listens only for window-change events — it never reads
+      on-screen text, form contents, or any other content, and never interacts with other apps on
+      your behalf.</p>
+  </section>
+
+  <section>
+    <h2>How call state is detected</h2>
+    <p>Zen Focus Lock listens for the system's call-state broadcast to detect whether a call is
+      ringing or active, so it can guarantee it never blocks or interferes with incoming calls or
+      the in-call screen. This does not require the READ_PHONE_STATE permission and never accesses
+      your phone number, call log, or contacts.</p>
+  </section>
+
+  <section>
+    <h2>What the Usage Access permission is used for</h2>
+    <p>Zen Balance (and the Awareness screen) use Android's Usage Access permission to read how
+      many minutes each app has been on screen today — nothing else. This never reveals what's
+      inside an app, only how long it was open. Usage totals are computed on the fly from
+      Android's own records and are not stored or transmitted anywhere by this app.</p>
+  </section>
+
+  <section>
+    <h2>Payment apps, outgoing calls, social media, games, entertainment, shopping, food delivery, and browsers</h2>
+    <p>During Zen Lock or Sleep Mode, payment apps, outgoing calls (via your device's default
+      Phone app), social media apps, games, entertainment apps (YouTube, Netflix, Prime Video,
+      Disney+ Hotstar, Pinterest, and other video-streaming/OTT apps), shopping apps, food
+      delivery apps, quick-commerce/grocery apps, and web browsers are always restricted — there's
+      no way to allow any of these, even individually. Zen Focus Lock only controls whether these
+      apps can be opened; it never reads, stores, or otherwise interacts with any payment
+      credentials, PINs, OTPs, transactions, social media content, game progress, purchases,
+      orders, or browsing history.</p>
+  </section>
+
+  <section>
+    <h2>What always stays available</h2>
+    <p>Incoming calls, emergency calling, your Camera app, and any Calendar, Calculator, or Clock
+      app are always reachable, regardless of what's running or which mode is active. You can
+      uninstall Zen Focus Lock or revoke any of its permissions at any time from Android Settings
+      — the app never prevents this.</p>
+  </section>
+
+  <section>
+    <h2>Ads and payments to end a session early</h2>
+    <p>The "watch ads" and "pay to unlock" options shown when ending a session early are
+      self-imposed friction, not a discount or reward — they exist to make quitting early cost
+      some effort. The payment option is processed entirely through Google Play Billing — this
+      app never sees or stores your card, UPI, or account details; Google handles the transaction
+      and the app only learns whether it succeeded. Letting the timer finish on its own is always
+      free and instant.</p>
+  </section>
+
+  <section>
+    <h2>Temporary "watch an ad" unlock</h2>
+    <p>During any active session, watching a short ad unlocks every app for 5 minutes without
+      ending the session — capped at 2 uses per rolling hour so it can't be chained to defeat the
+      session entirely.</p>
+  </section>
+
+  <section>
+    <h2>Zen Premium subscription</h2>
+    <p>Zen Premium is a recurring subscription (monthly or yearly) processed entirely through
+      Google Play Billing — this app never sees or stores your card, UPI, or account details.
+      Prices are set and localized to your country by Google Play. Premium removes the ad
+      requirement from the two unlock mechanics above (still capped the same as for everyone
+      else) — it does not change what data this app collects, since it collects none. Manage or
+      cancel your subscription any time from Google Play's own subscriptions page.</p>
+  </section>
+
+  <section>
+    <h2>Known limitations</h2>
+    <p>Outgoing-call restriction only applies to your device's default Phone app; calls placed
+      from other apps (e.g. VoIP or messaging apps) cannot be blocked without enterprise
+      device-management enrollment, which this app does not use. Camera access is allowed at the
+      whole-app level only — it cannot be limited to just photo-taking, since doing so would
+      require reading on-screen content, which this app deliberately never does.</p>
+  </section>
+
+  <section>
+    <h2>Changes to this policy</h2>
+    <p>If this app's behavior changes in a way that affects your privacy, this page will be
+      updated to match before that change ships.</p>
+  </section>
+
+  <section>
+    <h2>Contact</h2>
+    <p>Questions about this policy can be sent to <!-- REPLACE with your real contact email -->
+      <a href="mailto:support@sarvixbyte.com">support@sarvixbyte.com</a>.</p>
+  </section>
+</main>
+<footer>
+  &copy; 2026 Zen Phone Lock. Hosted at sarvixbyte.com.
+</footer>
+</body>
+</html>
