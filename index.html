@@ -69,14 +69,18 @@
   <p>Package: com.focuslock.app</p>
 </header>
 <main>
-  <p class="updated">Last updated: <!-- UPDATE THIS DATE when you publish --> 26 August 2026</p>
+  <p class="updated">Last updated: <!-- UPDATE THIS DATE when you publish --> 27 August 2026</p>
 
   <section>
     <h2>No data collection</h2>
-    <p>Zen Focus Lock has no account, no analytics, no ad network, and makes no network requests
-      of any kind. Every setting and session record it keeps — your duration, allowed apps, and
-      session history — is stored only in this app's private local storage on your device.
-      Nothing is ever sent anywhere, and nothing is shared with any third party.</p>
+    <p>Zen Focus Lock has no account, no analytics, no ad network, and sends no data anywhere.
+      The one exception is a read-only check of whether your device currently has a network
+      connection at all (Wi-Fi/cellular up or down) — used only to require being online before
+      the "watch ads to unlock early" option can be used, so it can't be bypassed via airplane
+      mode; this check contacts nothing and transmits nothing itself. Every setting and session
+      record it keeps — your duration, allowed apps, and session history — is stored only in
+      this app's private local storage on your device. Nothing is ever sent anywhere, and
+      nothing is shared with any third party.</p>
   </section>
 
   <section>
@@ -153,9 +157,33 @@
   <section>
     <h2>What always stays available</h2>
     <p>Incoming calls, emergency calling, your Camera app, and any Calendar, Calculator, or Clock
-      app are always reachable, regardless of what's running or which mode is active. You can
-      uninstall Zen Focus Lock or revoke any of its permissions at any time from Android Settings
-      — the app never prevents this.</p>
+      app are always reachable, regardless of what's running or which mode is active.</p>
+  </section>
+
+  <section>
+    <h2>Settings, Play Store, and uninstalling during a session</h2>
+    <p>While any session (Lock, Sleep, or Balance) is active, this app also blocks Android
+      Settings, the Google Play Store app, and the system uninstall confirmation screen — the
+      same unconditional way described above, in every mode. This exists so a session can't be
+      undone from the outside (disabling Accessibility/Device Admin, or removing the app
+      entirely) partway through. You can always end a session — either by letting the timer
+      finish on its own (free and instant), or through the watch-ads/pay early-exit option — and
+      once no session is active, Settings, Play Store, and uninstalling are all immediately
+      reachable again with no restriction.</p>
+  </section>
+
+  <section>
+    <h2>Device Admin</h2>
+    <p>Starting your first session asks you to activate "Device admin" status for this app,
+      which is the only way a normal (non-enterprise) app can make itself harder to uninstall —
+      Android requires a device admin to be deactivated first, before it can be removed. This
+      app requests zero device-management policies with it (no lock-screen control, no data
+      wipe, no camera disable, nothing) — it exists purely for the uninstall friction described
+      above. Once granted, it stays active permanently rather than being turned off between
+      sessions, so you're only asked to activate it the one time rather than before every
+      session. You can deactivate it yourself at any time from Android Settings → Security →
+      Device admin apps — that path can never be blocked by this or any app, it's an OS-level
+      guarantee.</p>
   </section>
 
   <section>
