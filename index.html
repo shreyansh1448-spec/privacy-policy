@@ -69,7 +69,7 @@
   <p>Package: com.focuslock.app</p>
 </header>
 <main>
-  <p class="updated">Last updated: <!-- UPDATE THIS DATE when you publish --> 27 August 2026</p>
+  <p class="updated">Last updated: <!-- UPDATE THIS DATE when you publish --> 28 August 2026</p>
 
   <section>
     <h2>No data collection</h2>
@@ -174,16 +174,17 @@
 
   <section>
     <h2>Device Admin</h2>
-    <p>Starting your first session asks you to activate "Device admin" status for this app,
-      which is the only way a normal (non-enterprise) app can make itself harder to uninstall —
-      Android requires a device admin to be deactivated first, before it can be removed. This
-      app requests zero device-management policies with it (no lock-screen control, no data
-      wipe, no camera disable, nothing) — it exists purely for the uninstall friction described
-      above. Once granted, it stays active permanently rather than being turned off between
-      sessions, so you're only asked to activate it the one time rather than before every
-      session. You can deactivate it yourself at any time from Android Settings → Security →
-      Device admin apps — that path can never be blocked by this or any app, it's an OS-level
-      guarantee.</p>
+    <p>Starting a session asks you to activate "Device admin" status for this app, which is the
+      only way a normal (non-enterprise) app can make itself harder to uninstall — Android
+      requires a device admin to be deactivated first, before it can be removed. This app
+      requests zero device-management policies with it (no lock-screen control, no data wipe, no
+      camera disable, nothing) — it exists purely for the uninstall friction described above.
+      It's activated at the start of each session and released automatically the moment that
+      session ends, so outside an active session the app can always be uninstalled directly with
+      no extra step — the tradeoff being a fresh activation prompt before every subsequent
+      session. You can also deactivate it yourself at any time, even during a session, from
+      Android Settings → Security → Device admin apps — that path can never be blocked by this
+      or any app, it's an OS-level guarantee.</p>
   </section>
 
   <section>
