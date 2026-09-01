@@ -66,26 +66,47 @@
 <body>
 <header>
   <h1>Zen Phone Lock — Privacy Policy</h1>
-  <p>Package: com.focuslock.app</p>
+  <p>Package: com.zenphonelock.app</p>
 </header>
 <main>
-  <p class="updated">Last updated: <!-- UPDATE THIS DATE when you publish --> 26 August 2026</p>
+  <p class="updated">Last updated: <!-- UPDATE THIS DATE when you publish --> 31 August 2026</p>
 
   <section>
     <h2>No data collection</h2>
-    <p>Zen Focus Lock has no account, no analytics, no ad network, and makes no network requests
-      of any kind. Every setting and session record it keeps — your duration, allowed apps, and
-      session history — is stored only in this app's private local storage on your device.
-      Nothing is ever sent anywhere, and nothing is shared with any third party.</p>
+    <p>Zen Focus Lock has no account, no analytics, no ad network, and sends no data anywhere.
+      The one exception is a read-only check of whether your device currently has a network
+      connection at all (Wi-Fi/cellular up or down) — used only to require being online before
+      the "watch ads to unlock early" option can be used, so it can't be bypassed via airplane
+      mode; this check contacts nothing and transmits nothing itself. Every setting and session
+      record it keeps — your duration, allowed apps, and session history — is stored only in
+      this app's private local storage on your device. Nothing is ever sent anywhere, and
+      nothing is shared with any third party.</p>
   </section>
 
   <section>
     <h2>What the Accessibility permission is used for</h2>
-    <p>Zen Focus Lock uses Android's Accessibility service for one purpose only: detecting which
-      app is in the foreground, so it can show a restriction screen in place of apps you didn't
-      allow during an active session. It listens only for window-change events — it never reads
-      on-screen text, form contents, or any other content, and never interacts with other apps on
-      your behalf.</p>
+    <p>Zen Focus Lock uses Android's Accessibility service mainly to detect which app is in the
+      foreground, so it can show a restriction screen in place of apps you didn't allow during an
+      active session — this only needs window-change events, not screen content. It additionally
+      detects interaction (tapping play/pause/next, seeking, etc.) inside a floating
+      (Picture-in-Picture) window belonging to a restricted app during a session, so it can return
+      you to the lock screen instead of letting that video keep playing over it. It also detects
+      when YouTube's Shorts feed specifically is open, so Shorts can stay locked during Zen Lock
+      even when you've allowed YouTube itself — done by matching YouTube's own internal
+      screen-element names for its Shorts player, not by reading any video, comment, or account
+      content. These are the only two cases where it reads window content — not screen pixels —
+      and only for that floating window or the foreground YouTube window; it never reads the
+      content of any other app's screen, never reads form contents or typed text, and never
+      collects, stores, or transmits anything it reads.</p>
+    <p>There is one further, narrower case, used only as a last resort: if a floating YouTube
+      window can't be classified as Shorts or not by either of the checks above, the app takes a
+      single on-device screenshot (Android 11 and newer only) to check whether that window's video
+      is a vertical video shown pillarboxed with letterbox-style bars — nothing more specific than
+      that shape is examined. The screenshot is cropped to that one floating window, analyzed
+      in-memory, and discarded immediately; it is never saved to storage, never displayed anywhere,
+      and never transmitted off your device. This uses Android's on-device accessibility
+      screenshot API, not screen recording or casting, and requires no permission beyond the
+      Accessibility access already described here.</p>
   </section>
 
   <section>
@@ -99,46 +120,122 @@
   <section>
     <h2>What the Usage Access permission is used for</h2>
     <p>Zen Balance (and the Awareness screen) use Android's Usage Access permission to read how
-      many minutes each app has been on screen today — nothing else. This never reveals what's
-      inside an app, only how long it was open. Usage totals are computed on the fly from
-      Android's own records and are not stored or transmitted anywhere by this app.</p>
+      many minutes each app has been on screen — nothing else. The Awareness screen can show this
+      for today, the past week, or the past month, but in every case it's only ever screen-on
+      time, never what's inside an app. Usage totals are computed on the fly from Android's own
+      records and are not stored or transmitted anywhere by this app.</p>
+  </section>
+
+  <section>
+    <h2>Audio during Zen Balance</h2>
+    <p>When a Zen Balance app goes over its session limit, this app claims audio focus to stop
+      that app's music or video from continuing to play in the background — the same standard
+      Android mechanism any media app already listens for (e.g. a phone call interrupting music).
+      This only affects playback in the exact moment a limit is reached; audio focus is released
+      as soon as the intervention screen closes.</p>
+  </section>
+
+  <section>
+    <h2>Screen Pinning on a hard block</h2>
+    <p>Whenever a session hard-blocks something — a disallowed app during Zen Focus Lock,
+      Settings/Play Store/the uninstall screen, or Zen Balance's over-limit stop — that block
+      screen also pins itself to the foreground using Android's own "Screen Pinning" feature, so
+      Home and Recents can't be used to jump back to whatever was blocked. Android shows its own
+      one-time system dialog explaining this the first time it happens on your device; unpinning
+      outside of tapping this app's own "Back to Focus"/"Go back" button requires the OS's own
+      hold-Back-and-Overview gesture. This is the ordinary form of screen pinning, not the
+      stronger "Device Owner" kiosk mode — it can't suppress the notification shade, which only a
+      factory-provisioned Device Owner app could do, and this app deliberately doesn't use Device
+      Owner provisioning (see "Known limitations" below).</p>
+  </section>
+
+  <section>
+    <h2>Optional floating status bubble</h2>
+    <p>If you separately grant "Display over other apps" (Android's own special permission, not a
+      normal one — it's granted from Settings, and Zen Focus Lock never assumes it's on), a small
+      floating bubble can appear over a restricted app's Picture-in-Picture window (e.g. a YouTube
+      Short) showing your remaining time, with a tap to return to the app. This is entirely
+      optional and purely informational — it has no enforcement power of its own, and every
+      restriction still works fully whether or not you grant it.</p>
+  </section>
+
+  <section>
+    <h2>"Turn off floating video" shortcut</h2>
+    <p>The first time a restricted app's Picture-in-Picture video is detected, the lock screen
+      offers a one-time button that opens that app's own Picture-in-Picture setting in Android
+      Settings — this only opens the screen; it cannot change that app's settings for you, only
+      you can, by confirming it there yourself. Zen Focus Lock has no partnership or affiliation
+      with any app named here (e.g. YouTube) — it's just naming which app's settings screen the
+      button opens.</p>
   </section>
 
   <section>
     <h2>Payment apps, outgoing calls, social media, games, entertainment, shopping, food delivery, and browsers</h2>
-    <p>During Zen Lock or Sleep Mode, payment apps, outgoing calls (via your device's default
-      Phone app), social media apps, games, entertainment apps (YouTube, Netflix, Prime Video,
+    <p>During Zen Lock or Complete Lock, payment apps, outgoing calls (via your device's default
+      Phone app), social media apps, games, entertainment apps (Netflix, Prime Video,
       Disney+ Hotstar, Pinterest, and other video-streaming/OTT apps), shopping apps, food
       delivery apps, quick-commerce/grocery apps, and web browsers are always restricted — there's
-      no way to allow any of these, even individually. Zen Focus Lock only controls whether these
-      apps can be opened; it never reads, stores, or otherwise interacts with any payment
-      credentials, PINs, OTPs, transactions, social media content, game progress, purchases,
-      orders, or browsing history.</p>
+      no way to allow any of these, even individually. YouTube is the one exception: it can be
+      allowed like any other app, but its Shorts feed specifically is always restricted regardless
+      (see "What the Accessibility permission is used for" above). Zen Focus Lock only controls
+      whether these apps can be opened; it never reads, stores, or otherwise interacts with any
+      payment credentials, PINs, OTPs, transactions, social media content, game progress,
+      purchases, orders, or browsing history.</p>
   </section>
 
   <section>
     <h2>What always stays available</h2>
     <p>Incoming calls, emergency calling, your Camera app, and any Calendar, Calculator, or Clock
-      app are always reachable, regardless of what's running or which mode is active. You can
-      uninstall Zen Focus Lock or revoke any of its permissions at any time from Android Settings
-      — the app never prevents this.</p>
+      app are always reachable, regardless of what's running or which mode is active.</p>
+  </section>
+
+  <section>
+    <h2>Settings, Play Store, and uninstalling during a session</h2>
+    <p>While any session (Lock, Complete Lock, or Balance) is active, this app also blocks Android
+      Settings, the Google Play Store app, and the system uninstall confirmation screen — the
+      same unconditional way described above, in every mode. This exists so a session can't be
+      undone from the outside (disabling Accessibility/Device Admin, or removing the app
+      entirely) partway through. You can always end a session — either by letting the timer
+      finish on its own (free and instant), or through the watch-ads/pay early-exit option — and
+      once no session is active, Settings, Play Store, and uninstalling are all immediately
+      reachable again with no restriction.</p>
+  </section>
+
+  <section>
+    <h2>Device Admin</h2>
+    <p>Starting your first session asks you to activate "Device admin" status for this app,
+      which is the only way a normal (non-enterprise) app can make itself harder to uninstall —
+      Android requires a device admin to be deactivated first, before it can be removed. This
+      app requests exactly one device-management policy with it: force-lock (no data wipe, no
+      camera disable, nothing else) — used whenever a session blocks something (a disallowed
+      app, Settings, Play Store, the uninstall screen, or Zen Balance's over-limit stop), which
+      also locks your screen, not just this app's own block screen. force-lock only ever
+      triggers your own existing lock-screen credential (PIN/pattern/biometric) — this app never
+      sets, sees, or changes that credential. Once granted, it stays
+      active permanently rather than being turned off between sessions, so you're only asked to
+      activate it the one time rather than before every session — the tradeoff being that
+      uninstalling always requires deactivating it first, session or not. You can deactivate it
+      yourself at any time from Android Settings → Security → Device admin apps — that path can
+      never be blocked by this or any app, it's an OS-level guarantee.</p>
   </section>
 
   <section>
     <h2>Ads and payments to end a session early</h2>
     <p>The "watch ads" and "pay to unlock" options shown when ending a session early are
       self-imposed friction, not a discount or reward — they exist to make quitting early cost
-      some effort. The payment option is processed entirely through Google Play Billing — this
-      app never sees or stores your card, UPI, or account details; Google handles the transaction
-      and the app only learns whether it succeeded. Letting the timer finish on its own is always
-      free and instant.</p>
+      some effort. The ad option is a placeholder in this build: no ad network is integrated yet.
+      The payment option is processed entirely through Google Play Billing — this app never sees
+      or stores your card, UPI, or account details; Google handles the transaction and the app
+      only learns whether it succeeded. Letting the timer finish on its own is always free and
+      instant.</p>
   </section>
 
   <section>
     <h2>Temporary "watch an ad" unlock</h2>
-    <p>During any active session, watching a short ad unlocks every app for 5 minutes without
-      ending the session — capped at 2 uses per rolling hour so it can't be chained to defeat the
-      session entirely.</p>
+    <p>During any active session, watching one placeholder ad unlocks every app for 5 minutes
+      without ending the session — capped at 2 uses per rolling hour so it can't be chained to
+      defeat the session entirely. Like the early-exit ad option, no real ad network is
+      integrated in this build yet.</p>
   </section>
 
   <section>
@@ -157,7 +254,12 @@
       from other apps (e.g. VoIP or messaging apps) cannot be blocked without enterprise
       device-management enrollment, which this app does not use. Camera access is allowed at the
       whole-app level only — it cannot be limited to just photo-taking, since doing so would
-      require reading on-screen content, which this app deliberately never does.</p>
+      require reading on-screen content, which this app deliberately never does. Screen Pinning
+      on a hard block (see above) can't suppress the notification shade — a determined person can
+      still swipe it down and jump elsewhere from a notification — since fully blocking it
+      requires "Device Owner" provisioning, which can only be granted before any Google account
+      is added to a device (in practice, a factory reset) and which this app deliberately doesn't
+      require.</p>
   </section>
 
   <section>
