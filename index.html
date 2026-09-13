@@ -69,7 +69,7 @@
   <p>Package: com.zenphonelock.app</p>
 </header>
 <main>
-  <p class="updated">Last updated: <!-- UPDATE THIS DATE when you publish --> 31 August 2026</p>
+  <p class="updated">Last updated: <!-- UPDATE THIS DATE when you publish --> 14 September 2026</p>
 
   <section>
     <h2>No data collection</h2>
@@ -87,17 +87,19 @@
     <h2>What the Accessibility permission is used for</h2>
     <p>Zen Focus Lock uses Android's Accessibility service mainly to detect which app is in the
       foreground, so it can show a restriction screen in place of apps you didn't allow during an
-      active session — this only needs window-change events, not screen content. It additionally
-      detects interaction (tapping play/pause/next, seeking, etc.) inside a floating
-      (Picture-in-Picture) window belonging to a restricted app during a session, so it can return
-      you to the lock screen instead of letting that video keep playing over it. It also detects
-      when YouTube's Shorts feed specifically is open, so Shorts can stay locked during Zen Lock
-      even when you've allowed YouTube itself — done by matching YouTube's own internal
-      screen-element names for its Shorts player, not by reading any video, comment, or account
-      content. These are the only two cases where it reads window content — not screen pixels —
-      and only for that floating window or the foreground YouTube window; it never reads the
-      content of any other app's screen, never reads form contents or typed text, and never
-      collects, stores, or transmits anything it reads.</p>
+      active Zen Lock session, or a Zen Balance app once it's gone over its own time limit (or is
+      set to always-block) — this only needs window-change events, not screen content. It also
+      periodically checks for, and detects interaction with, a floating (Picture-in-Picture)
+      window belonging to any app currently blocked this way. Rather than re-locking your screen
+      the instant such a window is seen, it first tries clicking that window's own close button
+      automatically for up to a few seconds — only if the window is still open after that does it
+      return you to the lock screen. It also detects when YouTube's Shorts feed specifically is
+      open, so Shorts can stay locked during Zen Lock even when you've allowed YouTube itself —
+      done by matching YouTube's own internal screen-element names for its Shorts player, not by
+      reading any video, comment, or account content. These are the only two cases where it reads
+      window content — not screen pixels — and only for that floating window or the foreground
+      YouTube window; it never reads the content of any other app's screen, never reads form
+      contents or typed text, and never collects, stores, or transmits anything it reads.</p>
     <p>There is one further, narrower case, used only as a last resort: if a floating YouTube
       window can't be classified as Shorts or not by either of the checks above, the app takes a
       single on-device screenshot (Android 11 and newer only) to check whether that window's video
@@ -136,27 +138,24 @@
   </section>
 
   <section>
-    <h2>Screen Pinning on a hard block</h2>
+    <h2>How a hard block stays enforced</h2>
     <p>Whenever a session hard-blocks something — a disallowed app during Zen Focus Lock,
-      Settings/Play Store/the uninstall screen, or Zen Balance's over-limit stop — that block
-      screen also pins itself to the foreground using Android's own "Screen Pinning" feature, so
-      Home and Recents can't be used to jump back to whatever was blocked. Android shows its own
-      one-time system dialog explaining this the first time it happens on your device; unpinning
-      outside of tapping this app's own "Back to Focus"/"Go back" button requires the OS's own
-      hold-Back-and-Overview gesture. This is the ordinary form of screen pinning, not the
-      stronger "Device Owner" kiosk mode — it can't suppress the notification shade, which only a
-      factory-provisioned Device Owner app could do, and this app deliberately doesn't use Device
-      Owner provisioning (see "Known limitations" below).</p>
+      Settings/Play Store/the uninstall screen, or Zen Balance's over-limit stop — enforcement
+      relies on the device lock alone, not on Android's "Screen Pinning" feature. If you use Home,
+      Recents, or Back to reach whatever was blocked, this app detects it reappearing and
+      re-blocks it (re-locking your screen if needed) the same way every time, rather than trying
+      to prevent you from navigating there at all.</p>
   </section>
 
   <section>
     <h2>Optional floating status bubble</h2>
     <p>If you separately grant "Display over other apps" (Android's own special permission, not a
       normal one — it's granted from Settings, and Zen Focus Lock never assumes it's on), a small
-      floating bubble can appear over a restricted app's Picture-in-Picture window (e.g. a YouTube
-      Short) showing your remaining time, with a tap to return to the app. This is entirely
-      optional and purely informational — it has no enforcement power of its own, and every
-      restriction still works fully whether or not you grant it.</p>
+      floating bubble can appear over a blocked app's Picture-in-Picture window (e.g. a YouTube
+      Short during Zen Lock, or any app's PiP window once it's over its Zen Balance limit) showing
+      your remaining time, with a tap to return to the app. This is entirely optional and purely
+      informational — it has no enforcement power of its own, and every restriction still works
+      fully whether or not you grant it.</p>
   </section>
 
   <section>
@@ -170,17 +169,20 @@
   </section>
 
   <section>
-    <h2>Payment apps, outgoing calls, social media, games, entertainment, shopping, food delivery, and browsers</h2>
+    <h2>Payment apps, outgoing calls, social media, games, entertainment, shopping, and food delivery</h2>
     <p>During Zen Lock or Complete Lock, payment apps, outgoing calls (via your device's default
       Phone app), social media apps, games, entertainment apps (Netflix, Prime Video,
       Disney+ Hotstar, Pinterest, and other video-streaming/OTT apps), shopping apps, food
-      delivery apps, quick-commerce/grocery apps, and web browsers are always restricted — there's
-      no way to allow any of these, even individually. YouTube is the one exception: it can be
-      allowed like any other app, but its Shorts feed specifically is always restricted regardless
-      (see "What the Accessibility permission is used for" above). Zen Focus Lock only controls
-      whether these apps can be opened; it never reads, stores, or otherwise interacts with any
-      payment credentials, PINs, OTPs, transactions, social media content, game progress,
-      purchases, orders, or browsing history.</p>
+      delivery apps, and quick-commerce/grocery apps are always restricted — there's no way to
+      allow any of these, even individually. Web browsers and YouTube are handled differently:
+      under Zen Focus Lock, either can be added to your allow-list and opened like any other app
+      (YouTube's Shorts feed specifically stays locked either way — see "What the Accessibility
+      permission is used for" above); under Complete Lock, everything non-essential is restricted
+      regardless, so browsers and YouTube are blocked there too, the same as everything else
+      outside its fixed essentials list. Zen Focus Lock only controls whether these apps can be
+      opened; it never reads, stores, or otherwise interacts with any payment credentials, PINs,
+      OTPs, transactions, social media content, game progress, purchases, orders, or browsing
+      history.</p>
   </section>
 
   <section>
@@ -209,14 +211,16 @@
       app requests exactly one device-management policy with it: force-lock (no data wipe, no
       camera disable, nothing else) — used whenever a session blocks something (a disallowed
       app, Settings, Play Store, the uninstall screen, or Zen Balance's over-limit stop), which
-      also locks your screen, not just this app's own block screen. force-lock only ever
-      triggers your own existing lock-screen credential (PIN/pattern/biometric) — this app never
-      sets, sees, or changes that credential. Once granted, it stays
-      active permanently rather than being turned off between sessions, so you're only asked to
-      activate it the one time rather than before every session — the tradeoff being that
-      uninstalling always requires deactivating it first, session or not. You can deactivate it
-      yourself at any time from Android Settings → Security → Device admin apps — that path can
-      never be blocked by this or any app, it's an OS-level guarantee.</p>
+      locks your screen immediately; the block screen itself only appears once you unlock the
+      device yourself, so it never sits behind or interferes with your own lock-screen credential
+      prompt. force-lock only ever triggers your own existing lock-screen credential
+      (PIN/pattern/biometric) — this app never sets, sees, or changes that credential. Device
+      admin status, once granted, stays active permanently rather than being turned off between
+      sessions, so you're only asked to activate it the one time rather than before every session
+      — the tradeoff being that uninstalling always requires deactivating it first, session or
+      not. You can deactivate it yourself at any time from Android Settings → Security → Device
+      admin apps — that path can never be blocked by this or any app, it's an OS-level
+      guarantee.</p>
   </section>
 
   <section>
@@ -254,12 +258,12 @@
       from other apps (e.g. VoIP or messaging apps) cannot be blocked without enterprise
       device-management enrollment, which this app does not use. Camera access is allowed at the
       whole-app level only — it cannot be limited to just photo-taking, since doing so would
-      require reading on-screen content, which this app deliberately never does. Screen Pinning
-      on a hard block (see above) can't suppress the notification shade — a determined person can
-      still swipe it down and jump elsewhere from a notification — since fully blocking it
-      requires "Device Owner" provisioning, which can only be granted before any Google account
-      is added to a device (in practice, a factory reset) and which this app deliberately doesn't
-      require.</p>
+      require reading on-screen content, which this app deliberately never does. Nothing in this
+      app can suppress the notification shade — a determined person can still swipe it down and
+      jump elsewhere from a notification, and this app will simply re-block whatever they land on
+      the same way it always does — since fully preventing that would require "Device Owner"
+      provisioning, which can only be granted before any Google account is added to a device (in
+      practice, a factory reset) and which this app deliberately doesn't require.</p>
   </section>
 
   <section>
