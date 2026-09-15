@@ -69,7 +69,7 @@
   <p>Package: com.zenphonelock.app</p>
 </header>
 <main>
-  <p class="updated">Last updated: <!-- UPDATE THIS DATE when you publish --> 14 September 2026</p>
+  <p class="updated">Last updated: <!-- UPDATE THIS DATE when you publish --> 15 September 2026</p>
 
   <section>
     <h2>No data collection</h2>
@@ -93,13 +93,12 @@
       window belonging to any app currently blocked this way. Rather than re-locking your screen
       the instant such a window is seen, it first tries clicking that window's own close button
       automatically for up to a few seconds — only if the window is still open after that does it
-      return you to the lock screen. It also detects when YouTube's Shorts feed specifically is
-      open, so Shorts can stay locked during Zen Lock even when you've allowed YouTube itself —
-      done by matching YouTube's own internal screen-element names for its Shorts player, not by
-      reading any video, comment, or account content. These are the only two cases where it reads
-      window content — not screen pixels — and only for that floating window or the foreground
-      YouTube window; it never reads the content of any other app's screen, never reads form
-      contents or typed text, and never collects, stores, or transmits anything it reads.</p>
+      return you to the lock screen. It also detects when YouTube's Shorts feed or Instagram's
+      Reels feed specifically is open, so either can stay locked even when you've allowed the
+      rest of that app — done by matching each app's own internal screen-element names for its
+      short-form video player, not by reading any video, comment, or account content. These are
+      read only for that floating window, or the foreground YouTube/Instagram window — never the
+      content of any other app's screen, and never form contents or typed text.</p>
     <p>There is one further, narrower case, used only as a last resort: if a floating YouTube
       window can't be classified as Shorts or not by either of the checks above, the app takes a
       single on-device screenshot (Android 11 and newer only) to check whether that window's video
@@ -109,6 +108,30 @@
       and never transmitted off your device. This uses Android's on-device accessibility
       screenshot API, not screen recording or casting, and requires no permission beyond the
       Accessibility access already described here.</p>
+    <p>Separately, during any active Zen Lock or Zen Balance session, this app reads the address
+      bar text of Chrome specifically, to check the domain you've navigated to against a small,
+      fully on-device category list (Adult, Shopping, Social) and two specific pages (YouTube
+      Shorts, Instagram) — blocking the page the same way a disallowed app is blocked, if it
+      matches. Only the address bar's own text is read, never the actual page content, and this
+      category list never leaves your device or gets updated remotely. This is domain-level
+      blocking, not full page inspection: it can tell youtube.com from instagram.com, and (only
+      in Chrome's address bar, since this is the one case where the address actually shows a
+      path) youtube.com/shorts from an ordinary YouTube video, but it cannot see anything
+      happening inside a page beyond its own address bar text, and this check does not apply to
+      any browser other than Chrome.</p>
+    <p>Zen Focus Lock only (not Zen Balance): once YouTube is on your allow-list, it goes further
+      than just Shorts — this app reads whatever text is currently visible anywhere in YouTube's
+      window (video titles, channel names, feed entries) and checks it against a small, fully
+      on-device list of study/learning-related words, so that only content which looks
+      educational stays watchable; anything else is blocked the same way a disallowed app is.
+      This is a plain keyword match, not real subject-matter understanding, so it can be wrong in
+      both directions — a genuinely educational video with a vague title may get blocked, and it
+      cannot tell "browsing YouTube's general feed" apart from "watching one specific non-study
+      video," so browsing the ordinary feed is usually blocked too unless a study-related word
+      happens to be visible on screen. This is skipped entirely during the rewarded "5 minutes of
+      access" unlock, which allows all YouTube content the same as everything else during that
+      window. Only the on-screen text is read, the same way as everywhere else in this section —
+      never video, audio, or account content.</p>
   </section>
 
   <section>
@@ -169,20 +192,20 @@
   </section>
 
   <section>
-    <h2>Payment apps, outgoing calls, social media, games, entertainment, shopping, and food delivery</h2>
-    <p>During Zen Lock or Complete Lock, payment apps, outgoing calls (via your device's default
-      Phone app), social media apps, games, entertainment apps (Netflix, Prime Video,
-      Disney+ Hotstar, Pinterest, and other video-streaming/OTT apps), shopping apps, food
-      delivery apps, and quick-commerce/grocery apps are always restricted — there's no way to
-      allow any of these, even individually. Web browsers and YouTube are handled differently:
-      under Zen Focus Lock, either can be added to your allow-list and opened like any other app
+    <h2>Outgoing calls, social media, games, entertainment, shopping, and food delivery</h2>
+    <p>During Zen Lock or Complete Lock, outgoing calls (via your device's default Phone app),
+      social media apps, games, entertainment apps (Netflix, Prime Video, Disney+ Hotstar,
+      Pinterest, and other video-streaming/OTT apps), shopping apps, food delivery apps, and
+      quick-commerce/grocery apps are always restricted — there's no way to allow any of these,
+      even individually. Payment apps, web browsers, and YouTube are handled differently: under
+      Zen Focus Lock, any of these can be added to your allow-list and opened like any other app
       (YouTube's Shorts feed specifically stays locked either way — see "What the Accessibility
       permission is used for" above); under Complete Lock, everything non-essential is restricted
-      regardless, so browsers and YouTube are blocked there too, the same as everything else
-      outside its fixed essentials list. Zen Focus Lock only controls whether these apps can be
-      opened; it never reads, stores, or otherwise interacts with any payment credentials, PINs,
-      OTPs, transactions, social media content, game progress, purchases, orders, or browsing
-      history.</p>
+      regardless, so payment apps, browsers, and YouTube are blocked there too, the same as
+      everything else outside its fixed essentials list. Zen Focus Lock only controls whether
+      these apps can be opened; it never reads, stores, or otherwise interacts with any payment
+      credentials, PINs, OTPs, transactions, social media content, game progress, purchases,
+      orders, or browsing history.</p>
   </section>
 
   <section>
