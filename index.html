@@ -108,9 +108,12 @@
       be enforced.</p>
     <p>During a focus session you start, the service is used only to:</p>
     <ul>
-      <li><strong>Detect which app is open</strong> (window-change events), so an app you didn't
-        allow is replaced with a restriction screen, or a Zen Balance app is paused once it
-        passes its time limit.</li>
+      <li><strong>Detect which app or screen is open</strong> (window-change events), so an app
+        you didn't allow is replaced with a restriction screen, or a Zen Balance app is paused
+        once it passes its time limit. In Zen Focus Lock and Complete Lock it also tells the home
+        screen apart from Recent apps (using the launcher's screen-element names only), so
+        pressing Home returns you to Zen Phone Lock's session screen while Recent apps keeps
+        working for switching between allowed apps.</li>
       <li><strong>Read Chrome's address bar text</strong> (never page content), to check the site
         against a small on-device list. Adult sites are blocked in every mode. In Zen Focus Lock,
         only recognized study and work sites stay open after a short grace period. In Complete
@@ -138,9 +141,11 @@
       <li><strong>Usage access</strong> (Zen Balance and the Awareness screen): reads how many
         minutes each app has been on screen. Computed on the fly from Android's own records, never
         stored or transmitted.</li>
-      <li><strong>Notification access</strong> (optional): cancels notifications from an app the
-        current session is blocking. Only the notification's package name is read, never its
-        title, text, or images.</li>
+      <li><strong>Notification access</strong> (required to start a session): during a session,
+        holds back notifications from every other app; they reappear within about two minutes of
+        the session ending. Calls, alarms, emergency alerts, and ongoing notifications (such as a
+        music player) are never held back. Only each notification's app name, category, and flags
+        are checked, never its title, text, or images.</li>
       <li><strong>Display over other apps</strong> (optional): shows a small status bubble over a
         blocked app's floating video, with your remaining time.</li>
       <li><strong>Device admin</strong> (force-lock policy only): locks your screen with your own
@@ -201,10 +206,10 @@
         from the default Phone app, social media, games, entertainment and video-streaming apps,
         shopping, food delivery, and quick-commerce apps. This applies to the main mode, presets,
         and schedules alike.</li>
-      <li><strong>Settings and uninstalling:</strong> while a session is active, Android Settings
-        and the system uninstall screen are blocked, so a session can't be undone partway through.
-        You can always end a session by letting the timer finish (free) or with the ad or payment
-        option. Once no session is active, both are immediately available again.</li>
+      <li><strong>Settings and uninstalling:</strong> Android Settings and the uninstall screen
+        are never blocked. You can always turn off the app's permissions or uninstall it. During a
+        session, opening either only shows a short reminder that doing so ends your session and
+        breaks your streak.</li>
       <li><strong>Temporary unlock:</strong> one rewarded ad unlocks all apps for 5 minutes, up to
         2 times per hour.</li>
     </ul>
