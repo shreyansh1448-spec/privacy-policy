@@ -110,10 +110,10 @@
     <ul>
       <li><strong>Detect which app or screen is open</strong> (window-change events), so an app
         you didn't allow is replaced with a restriction screen, or a Zen Balance app is paused
-        once it passes its time limit. In Zen Focus Lock and Complete Lock it also tells the home
-        screen apart from Recent apps (using the launcher's screen-element names only), so
-        pressing Home returns you to Zen Phone Lock's session screen while Recent apps keeps
-        working for switching between allowed apps.</li>
+        once it passes its time limit. During any session it also tells the home screen apart from
+        Recent apps (using the launcher's screen-element names only), so pressing Home returns
+        you to Zen Phone Lock's session screen, where you open apps from its own app grid, while Recent apps keeps working for switching
+        between open apps.</li>
       <li><strong>Read Chrome's address bar text</strong> (never page content), to check the site
         against a small on-device list. Adult sites are blocked in every mode. In Zen Focus Lock,
         only recognized study and work sites stay open after a short grace period. In Complete
@@ -202,9 +202,7 @@
     <ul>
       <li><strong>Always reachable:</strong> incoming calls, emergency calling, Camera, Calendar,
         Calculator, and Clock, in every mode.</li>
-      <li><strong>Google Play Store:</strong> reachable in Zen Balance. In Zen Focus Lock and
-        Complete Lock it's blocked unless it's on your allowed list, except for Zen Phone Lock's
-        own purchase screens (Google Play Billing).</li>
+      <li><strong>Google Play Store:</strong> always reachable, in every mode.</li>
       <li><strong>Always restricted in Zen Focus Lock and Complete Lock:</strong> outgoing calls
         from the default Phone app, social media, games, entertainment and video-streaming apps,
         shopping, food delivery, and quick-commerce apps. This applies to the main mode, presets,
